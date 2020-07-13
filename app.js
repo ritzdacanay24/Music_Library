@@ -21,12 +21,30 @@ function searchResults(data){
     let newResults = [];
     
     for(let i = 0; i < data.length; i ++){
-        if(data[i].title == title || data[i].album == album || data[i].artist == artist || data[i].genre == genre || data[i].releaseDate == releaseDate){
-            newResults.push(data[i]);
+        
+        if(title && album && artist && genre && releaseDate){
+            if(data[i].title == title && data[i].album == album && data[i].artist == artist && data[i].genre == genre && data[i].releaseDate == releaseDate){
+                newResults.push(data[i]);
+            }
         }
+
+        
     }
     generateTable(newResults)
-  }
+}
+
+
+$(document).ready(function(){
+    $("#title, #album, #artist, #genre, #releaseDate").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        if(value){
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+    });
+});
+
   
 function clearData(data){
     $("#results").empty();
@@ -43,23 +61,27 @@ function generateTable(data){
 
     let html = '<div>';
     html = `
-        <tr>
-            <th>Title</th>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Release Date</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Album</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
     `;
     $.each(data, function( index, value ) {
         html += `
-            <tr>
-                <td>${value.title}</td>
-                <td>${value.album}</td>
-                <td>${value.artist}</td>
-                <td>${value.genre}</td>
-                <td>${value.releaseDate}</td>
-            </tr>
+            <tbody id="myTable">
+                <tr>
+                    <td>${value.title}</td>
+                    <td>${value.album}</td>
+                    <td>${value.artist}</td>
+                    <td>${value.genre}</td>
+                    <td>${value.releaseDate}</td>
+                </tr>
+            </tbody>
         `;
     });
     html += '</div>';
@@ -113,7 +135,6 @@ function generateSearchDivs(data){
     html += `
 
         <div class="btn-group" role="group">
-            <button class="btn btn-info" onClick="searchResults(${data})"> Search </button>
             <button class="btn btn-warning text-right" onClick="clearData(${data})"> Clear </button>
         </div>
     
