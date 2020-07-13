@@ -1,6 +1,5 @@
 'use strict';
 
-
 $.ajax({
     method: "GET",
     url: "http://www.devcodecampmusiclibrary.com/api/music",
@@ -21,22 +20,17 @@ function searchResults(data){
     
     let newResults = [];
     
-      for(let i = 0; i < data.length; i ++){
-          
+    for(let i = 0; i < data.length; i ++){
         if(data[i].title == title || data[i].album == album || data[i].artist == artist || data[i].genre == genre || data[i].releaseDate == releaseDate){
             newResults.push(data[i]);
-          }
-      }
-      generateTable(newResults)
+        }
+    }
+    generateTable(newResults)
   }
   
 function clearData(data){
-    $( "#results" ).empty();
-    $("#title").val("");
-    $("#album").val("");
-    $("#artist").val("");
-    $("#genre").val("");
-    $("#releaseDate").val("");
+    $("#results").empty();
+    $("#fetch_results input").val("");
     generateTable(data)
 }
 
@@ -46,7 +40,7 @@ function generateTable(data){
         $('#results').html('<div>No results found</div>');
         return 
     }
-    
+
     let html = '<div>';
     html = `
         <tr>
@@ -107,7 +101,7 @@ function generateSearchDivs(data){
     let html = "<p>Filter</p>";
     $.each(options, function( index, value ) {
         html += `
-            <div class="input-group mb-3">
+            <div class="input-group mb-3" id="fetch_results">
                 <div class="input-group-prepend" onClick="searchResults(${data})">
                     <span class="input-group-text min-max-100">${value.title}</span>
                 </div>
