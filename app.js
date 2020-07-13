@@ -41,6 +41,12 @@ function clearData(data){
 }
 
 function generateTable(data){
+
+    if(!data.length){
+        $('#results').html('<div>No results found</div>');
+        return 
+    }
+    
     let html = '<div>';
     html = `
         <tr>
@@ -111,10 +117,12 @@ function generateSearchDivs(data){
     });
 
     html += `
+
         <div class="btn-group" role="group">
             <button class="btn btn-info" onClick="searchResults(${data})"> Search </button>
             <button class="btn btn-warning text-right" onClick="clearData(${data})"> Clear </button>
         </div>
+    
     `
     $('#search').append(html);
   }
