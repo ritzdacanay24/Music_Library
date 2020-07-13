@@ -32,6 +32,16 @@ function searchResults(data){
       generateTable(newResults)
   }
   
+function clearData(data){
+    $( "#results" ).empty();
+    $("#title").val("");
+    $("#album").val("");
+    $("#artist").val("");
+    $("#genre").val("");
+    $("#releaseDate").val("");
+    generateTable(data)
+}
+
 function generateTable(data){
     let html = '<div>';
     html = `
