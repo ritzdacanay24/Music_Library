@@ -18,9 +18,7 @@ function searchResults(data){
     let artist = $("#artist").val();
     let genre = $("#genre").val();
     let releaseDate = $("#releaseDate").val();
-    let isMatchAll = $('#isMatchAll').is(":checked") ? '&&' : '||';
     
-    console.log(isMatchAll)
     let newResults = [];
     
       for(let i = 0; i < data.length; i ++){
@@ -113,18 +111,10 @@ function generateSearchDivs(data){
     });
 
     html += `
-
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="isMatchAll" name="isMatchAll">
-        <label class="custom-control-label" for="isMatchAll">Check box to match all in search field</label>
-    </div>
-  
-    <div class="btn-group" role="group">
-        <button class="btn btn-info" onClick="searchResults(${data})"> Search </button>
-        <button class="btn btn-warning text-right" onClick="clearData(${data})"> Clear </button>
-    </div>
-
-    
+        <div class="btn-group" role="group">
+            <button class="btn btn-info" onClick="searchResults(${data})"> Search </button>
+            <button class="btn btn-warning text-right" onClick="clearData(${data})"> Clear </button>
+        </div>
     `
     $('#search').append(html);
   }
