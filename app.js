@@ -36,6 +36,63 @@ function generateTable(data){
     $('#results').append(html);
 }
 
-function search(){
+function generateSearchDivs(data){
+      
+    data = JSON.stringify(data).split('"').join("&quot;");
+
+    let options = [
+        {
+            "id":"title",
+            "placeholder" : "search title",
+            "title" : "Title"
+        },
+        {
+            "id":"album",
+            "placeholder" : "search album",
+            "title" : "Album"
+        },
+        {
+            "id":"artist",
+            "placeholder" : "search artist",
+            "title" : "Artist"
+        },
+        {
+            "id":"genre",
+            "placeholder" : "search genre",
+            "title" : "Genre"
+        },
+        {
+            "id":"releaseDate",
+            "placeholder" : "search date",
+            "title" : "Date"
+        }
+    ]
+
+    let html = "<p>Filter</p>";
+    $.each(options, function( index, value ) {
+        html += `
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" onClick="searchResults(${data})">
+                    <span class="input-group-text min-max-100">${value.title}</span>
+                </div>
+                <input type="text" class="form-control" placeholder="${value.placeholder}" id="${value.id}">
+            </div>
+        `;
+    });
+
+    html += `
+
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="isMatchAll" name="isMatchAll">
+        <label class="custom-control-label" for="isMatchAll">Check box to match all in search field</label>
+    </div>
+  
+    <div class="btn-group" role="group">
+        <button class="btn btn-info" onClick="searchResults(${data})"> Search </button>
+        <button class="btn btn-warning text-right" onClick="clearData(${data})"> Clear </button>
+    </div>
+
     
-}
+    `
+    $('#search').append(html);
+  }

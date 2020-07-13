@@ -8,11 +8,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+    .min-max-100{
+        min-width:100px;
+        max-width:100px;
+        cursor:pointer
+    }
+      .padding-60{
+          padding:60px
+      }
+  </style>
 </head>
-<body>
+<body class="padding-60">
     <div class="container">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="results">
+        <h3>Music Library</h3>
+        <div class="row">
+            <div class="col-lg-3">
+                <div id="search"></div>
+            </div>
+            <div class="col-lg-9">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="results">
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <script src="app.js"></script>
