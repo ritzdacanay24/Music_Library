@@ -8,8 +8,30 @@ $.ajax({
     async: false,  
   }).done(function( data ) {
     generateTable(data)
+    generateSearchDivs(data)
 });
 
+function searchResults(data){
+    $( "#results" ).empty();
+    let title = $("#title").val();
+    let album = $("#album").val();
+    let artist = $("#artist").val();
+    let genre = $("#genre").val();
+    let releaseDate = $("#releaseDate").val();
+    let isMatchAll = $('#isMatchAll').is(":checked") ? '&&' : '||';
+    
+    console.log(isMatchAll)
+    let newResults = [];
+    
+      for(let i = 0; i < data.length; i ++){
+          
+        if(data[i].title == title || data[i].album == album || data[i].artist == artist || data[i].genre == genre || data[i].releaseDate == releaseDate){
+            newResults.push(data[i]);
+          }
+      }
+      generateTable(newResults)
+  }
+  
 function generateTable(data){
     let html = '<div>';
     html = `
@@ -96,3 +118,5 @@ function generateSearchDivs(data){
     `
     $('#search').append(html);
   }
+
+  
