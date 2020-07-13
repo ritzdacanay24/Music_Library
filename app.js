@@ -105,7 +105,7 @@ function generateSearchDivs(data){
                 <div class="input-group-prepend" onClick="searchResults(${data})">
                     <span class="input-group-text min-max-100">${value.title}</span>
                 </div>
-                <input type="text" class="form-control" placeholder="${value.placeholder}" id="${value.id}">
+                <input type="text" class="form-control" placeholder="${value.placeholder}" id="${value.id}" autocomplete="off">
             </div>
         `;
     });
